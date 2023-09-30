@@ -43,11 +43,28 @@ export const CalendarProvider: React.FC<React.PropsWithChildren> = ({ children }
 
   const handleSetCurrentMonth = (newMonth: number) => {
     if (!monthsData[newMonth - 1]) {
-      setMonthsData((prev: Array<{ monthNumber: number, days: DayStatus[] }>) => [...prev, { monthNumber: newMonth, days: Array(30).fill('none') }]);
+      const daysInMonth = getDaysInMonth(newMonth);
+      setMonthsData((prev: typeof monthsData) => [...prev, { monthNumber: newMonth, days: Array(daysInMonth).fill('none') }]);
     }
     setCurrentMonth(newMonth);
   };
+  
 
+
+  const getDaysInMonth = (month: number) => {
+    switch (month) {
+      case 2: // February
+        return 28; // Note: This doesn't account for leap years
+      case 4: // April
+      case 6: // June
+      case 9: // September
+      case 11: // November
+        return 30;
+      default:
+        return 31;
+    }
+  };
+  
   return (
     <CalendarContext.Provider value={{ days: monthsData[currentMonth - 1].days, setDayStatus, currentMonth, setCurrentMonth: handleSetCurrentMonth }}>
       {children}
