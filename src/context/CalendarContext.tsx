@@ -10,9 +10,23 @@ type CalendarContextType = {
 
 export const CalendarContext = createContext<CalendarContextType | undefined>(undefined);
 
+const getDaysInMonth = (month: number) => {
+  switch (month) {
+    case 2: // February
+      return 28; // Excluding leap year
+    case 4: // April
+    case 6: // June
+    case 9: // September
+    case 11: // November
+      return 30;
+    default:
+      return 31;
+  }
+};
+
 export const CalendarProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   
-  const initialMonthData = { monthNumber: 1, days: Array(30).fill('none') };
+  const initialMonthData = { monthNumber: 1, days: Array(getDaysInMonth(1)).fill('none') };
   
   // Initialize monthsData from localStorage or use default values
   const [monthsData, setMonthsData] = useState(() => {
@@ -43,26 +57,9 @@ export const CalendarProvider: React.FC<React.PropsWithChildren> = ({ children }
 
   const handleSetCurrentMonth = (newMonth: number) => {
     if (!monthsData[newMonth - 1]) {
-      const daysInMonth = getDaysInMonth(newMonth);
-      setMonthsData((prev: typeof monthsData) => [...prev, { monthNumber: newMonth, days: Array(daysInMonth).fill('none') }]);
+      setMonthsData((prev: typeof monthsData) => [...prev, { monthNumber: newMonth, days: Array(getDaysInMonth(newMonth)).fill('none') }]);
     }
     setCurrentMonth(newMonth);
-  };
-  
-
-
-  const getDaysInMonth = (month: number) => {
-    switch (month) {
-      case 2: // February
-        return 28; // Note: This doesn't account for leap years
-      case 4: // April
-      case 6: // June
-      case 9: // September
-      case 11: // November
-        return 30;
-      default:
-        return 31;
-    }
   };
   
   return (

@@ -13,7 +13,7 @@ const Legend = () => {
         </div>
         <div className="flex items-center space-x-1 md:space-x-1.5 lg:space-x-2">
           <div className="w-6 h-6 bg-red-500 rounded-full"></div>
-          <span className="text-white">Failure</span>
+          <span className="text-white">Missed</span>
         </div>
       </div>
       <span className="text-gray-400">Completed: {completed}/30</span>

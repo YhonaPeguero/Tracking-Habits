@@ -1,1 +1,1 @@
-export type DayStatus = 'none' | 'success' | 'failure';
+export type DayStatus = 'none' | 'success' | 'missed';

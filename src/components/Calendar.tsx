@@ -10,11 +10,11 @@ function Calendar() {
           key={index}
           className={`w-12 h-12 rounded-full cursor-pointer border-2 ${
             status === 'success' ? 'bg-green-500 border-green-600' : 
-            status === 'failure' ? 'bg-red-500 border-red-600' : 'bg-gray-700 border-gray-800'
+            status === 'missed' ? 'bg-red-500 border-red-600' : 'bg-gray-700 border-gray-800'
           }`}
           onClick={() => {
             if(status === 'none') setDayStatus(index, 'success');
-            else if(status === 'success') setDayStatus(index, 'failure');
+            else if(status === 'success') setDayStatus(index, 'missed');
             else setDayStatus(index, 'none');
           }}
         ></div>
