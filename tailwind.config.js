@@ -5,7 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+        backgroundImage: () => ({
+          'fondo-mobile': "url('./assets/bg-image.jpg')",
+          'fondo-tablet': "url('./assets/bg-image.jpg')",
+          'fondo-desktop': "url('./assets/bg-image.jpg')",
+      })
+    },
   },
   plugins: [],
 }
